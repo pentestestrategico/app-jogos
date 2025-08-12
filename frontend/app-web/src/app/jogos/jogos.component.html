@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Gerenciar Jogos</h1>
+    <form (ngSubmit)="salvar()">
+        <input [(ngModel)]="jogo.nome" name="nome" placeholder="Nome do Jogo" required>
+        <input [(ngModel)]="jogo.genero" name="genero" placeholder="Gênero" required>
+        <input [(ngModel)]="jogo.ano" name="ano" placeholder="Ano" type="number" min="1950" max="2100" required>
+        <button type="submit">{{editando ? 'Atualizar' : 'Adicionar'}}</button>
+        <button type="button" *ngIf="editando" (click)="cancelarEdicao()">Cancelar</button>
+    </form>
+
+    <table *ngIf="jogos.length > 0">
+        <tr>
+            <th>Nome</th>
+            <th>Gênero</th>
+            <th>Ano</th>
+            <th>Ações</th>
+        </tr>
+        <tr *ngFor="let j of jogos; let i = index">
+            <td>{{j.nome}}</td>
+            <td>{{j.genero}}</td>
+            <td>{{j.ano}}</td>
+            <td>
+                <button (click)="editar(j, i)">Editar</button>
+                <button (click)="excluir(j.id)" style="background:#c62828;">Excluir</button>
+            </td>
+        </tr>
+    </table>
+    <div *ngIf="jogos.length === 0" class="status">Nenhum jogo cadastrado.</div>
+</div>
